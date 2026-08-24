@@ -1,416 +1,221 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Для тебя ❤️</title>
+    <title>Для Настикса ❤️</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
+    <div class="background">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+    </div>
 
-<div class="background">
+    <div id="hearts"></div>
 
-    <div class="glow glow-one"></div>
+    <div class="progress">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
 
-    <div class="glow glow-two"></div>
+    <main>
 
-</div>
+        <!-- ЭКРАН 1 -->
 
+        <section class="screen active" id="screen1">
 
-<div id="hearts"></div>
+            <div class="emoji">💌</div>
 
+            <h1>
+                Я кое что для тебя приготовил...
+            </h1>
 
+            <p>
+                Надеюсь тебе понравится)
+            </p>
 
-<div class="progress">
+            <button onclick="nextScreen()">
+                Жми меня ❤️
+            </button>
 
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-
-</div>
-
-
-
-
-<main>
+        </section>
 
 
-<!-- ЭКРАН 1 -->
+        <!-- ЭКРАН 2 -->
 
-<section class="screen active" id="screen1">
+        <section class="screen" id="screen2">
 
+            <div class="emoji">👀</div>
+
+            <h1>
+                Ты все таки нажала...
+            </h1>
+
+            <p>
+                Ну хорошо, идем дальше)
+            </p>
+
+            <button onclick="nextScreen()">
+                Идём дальше →
+            </button>
+
+        </section>
+
+
+        <!-- ЭКРАН 3 -->
+
+        <section class="screen" id="screen3">
+
+            <div class="emoji">🤔</div>
+
+            <h1>
+                Как ты думаешь, зачем я сделал этот сайт?
+            </h1>
+
+            <div class="answers">
+
+                <button
+                    class="answer escape-button"
+                    id="wrong1">
+                    Просто так
+                </button>
+
+                <button
+                    class="answer escape-button"
+                    id="wrong2">
+                    Потому что я Лелик 
+                </button>
+
+                <button
+                    class="answer correct"
+                    onclick="nextScreen()">
+                    Я тебя люблю ❤️
+                </button>
+
+            </div>
+
+            <div class="hint">
+                Подумай хорошенько)
+            </div>
+
+        </section>
+
+
+        <!-- ЭКРАН 4 -->
+
+        <section class="screen" id="screen4">
+
+            <div class="emoji">
+                💝
+            </div>
+
+            <h1>
+                Я так и знал, что ты правильно ответишь!
+            </h1>
+
+            <p>
+                ЛЮБЛЮ ТЕБЯ ❤️
+            </p>
+
+            <button onclick="nextScreen()">
+                Дальше ❤️
+            </button>
+
+        </section>
+
+
+        <!-- ЭКРАН 5 -->
+
+        <section class="screen" id="screen5">
+
+            <div class="emoji">
+                🥺
+            </div>
+
+            <h1>
+                Я был не прав где то, прости...
+            </h1>
+
+            <p>
+                Ты меня прощаешь?
+            </p>
+
+            <div class="answers forgiveness">
+
+                <button
+                    class="answer correct"
+                    onclick="nextScreen()">
+                     ДА ❤️
+                </button>
+
+                <button
+                    class="answer escape-button"
+                    id="noButton">
+                    НЕТ
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ЭКРАН 6 -->
+
+        <!-- ЭКРАН 6 -->
+
+<section class="screen final-screen" id="screen6">
 
     <div class="emoji">
-        💌
-    </div>
-
-
-    <h1>
-        Я кое-что для тебя приготовил...
-    </h1>
-
-
-    <p>
-        Надеюсь тебе понравится)
-    </p>
-
-
-    <button onclick="nextScreen()">
-        Нажми меня ❤️
-    </button>
-
-
-</section>
-
-
-
-
-
-<!-- ЭКРАН 2 -->
-
-
-<section class="screen" id="screen2">
-
-
-    <div class="emoji">
-        👀
-    </div>
-
-
-    <h1>
-        Ты всё-таки нажала...
-    </h1>
-
-
-    <p>
-        Ну хорошо) Раз уж начала — идём дальше 😏
-    </p>
-
-
-    <button onclick="nextScreen()">
-        Дальше →
-    </button>
-
-
-</section>
-
-
-
-
-
-
-<!-- ЭКРАН 3 -->
-
-
-<section class="screen" id="screen3">
-
-
-    <div class="emoji">
-        🤔
-    </div>
-
-
-    <h1>
-        Как ты думаешь, зачем я сделал этот сайт?
-    </h1>
-
-
-
-    <div class="answers">
-
-
-        <button 
-        class="answer escape-button"
-        id="wrong1">
-
-            Просто так
-
-        </button>
-
-
-
-        <button 
-        class="answer escape-button"
-        id="wrong2">
-
-            Скучно
-
-        </button>
-
-
-
-
-        <button 
-        class="answer correct"
-        onclick="nextScreen()">
-
-            Я тебя люблю ❤️
-
-        </button>
-
-
-
-    </div>
-
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ЭКРАН 4 -->
-
-
-<section class="screen" id="screen4">
-
-
-<div class="emoji">
-    🥰
-</div>
-
-
-
-<h1>
-    Я так и знал, что ты правильно ответишь!
-</h1>
-
-
-
-<p>
-    Люблю тебя ❤️
-</p>
-
-
-
-<button onclick="nextScreen()">
-
-    Дальше ❤️
-
-</button>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ЭКРАН 5 -->
-
-
-<section class="screen" id="screen5">
-
-
-<div class="emoji">
-    🥺
-</div>
-
-
-
-<h1>
-    Я был не прав где-то...
-</h1>
-
-
-
-<p>
-    Ты меня прощаешь?
-</p>
-
-
-
-<div class="answers forgiveness">
-
-
-
-<button 
-class="answer correct"
-onclick="nextScreen()">
-
-    ДА ❤️
-
-</button>
-
-
-
-<button
-class="answer escape-button"
-id="noButton">
-
-    НЕТ
-
-</button>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ЭКРАН 6 -->
-
-
-<section class="screen" id="screen6">
-
-
-<div class="emoji">
-    🥺
-</div>
-
-
-
-<h1>
-    Ну всё...
-</h1>
-
-
-
-<p>
-
-    Я понял, что был не прав.<br>
-    Обещаю больше так не делать ❤️
-
-</p>
-
-
-
-<button onclick="nextScreen()">
-
-    Я тебя прощаю ❤️
-
-</button>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-
-<!-- ЭКРАН 7 -->
-
-
-<section class="screen final-screen" id="screen7">
-
-
-<div class="emoji">
-    ❤️
-</div>
-
-
-
-<h1>
-    Я ЗНАЛ, ЧТО ТЫ ПРОСТИЛА МЕНЯ!
-</h1>
-
-
-
-<p>
-    ЛЮБЛЮ ТЕБЯ! ❤️
-</p>
-
-
-
-
-<div class="photos">
-
-
-
-    <div class="photo">
-
-        <img
-        src="photo1.jpg"
-        alt="Фото 1">
-
-    </div>
-
-
-
-
-    <div class="heart-between">
-
         ❤️
+    </div>
+
+    <h1>
+        Я ЗНАЛ ЧТО ТЫ ПРОЩАЕШЬ МЕНЯ!
+    </h1>
+
+    <p>
+        ЛЮБЛЮ ТЕБЯ СИЛЬНО!❤️
+    </p>
+
+    <div class="photos">
+
+        <div class="photo">
+            <img
+                src="photo1.jpg"
+                alt="Фото 1">
+        </div>
+
+        <div class="heart-between">
+            ❤️
+        </div>
+
+        <div class="photo">
+            <img
+                src="photo2.jpg"
+                alt="Фото 2">
+        </div>
 
     </div>
 
-
-
-
-    <div class="photo">
-
-        <img
-        src="photo2.jpg"
-        alt="Фото 2">
-
+    <div class="final-text">
+        Будь со мной всегда пожалуйста..❤️
     </div>
-
-
-
-</div>
-
-
-
-
-
-<div class="final-text">
-
-    Спасибо, что дошла до конца 🥹
-
-</div>
-
-
 
 </section>
 
+    </main>
 
 
-
-
-</main>
-
-
-
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 
 </body>
-
 </html>
