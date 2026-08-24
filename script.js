@@ -1,21 +1,30 @@
 let currentScreen = 1;
 
 
-/* Переход между экранами */
+/* =========================
+   ПЕРЕХОДЫ МЕЖДУ ЭКРАНАМИ
+========================= */
 
 function nextScreen() {
 
-    if (currentScreen >= 6) {
+    if (currentScreen >= 7) {
         return;
     }
+
 
     const oldScreen = document.getElementById(
         `screen${currentScreen}`
     );
 
+
     const newScreen = document.getElementById(
         `screen${currentScreen + 1}`
     );
+
+
+    if (!newScreen) {
+        return;
+    }
 
 
     oldScreen.classList.remove("active");
@@ -25,21 +34,25 @@ function nextScreen() {
 
     currentScreen++;
 
+
     updateProgress();
 
-    createHearts(10);
+    createHearts(12);
 }
 
 
 
-/* Индикатор экранов */
+/* =========================
+   ТОЧКИ ПРОГРЕССА
+========================= */
 
 function updateProgress() {
 
-    const dots = document.querySelectorAll(".dot");
+    const dots =
+        document.querySelectorAll(".dot");
 
 
-    dots.forEach((dot, index) => {
+    dots.forEach((dot, index)=>{
 
         dot.classList.toggle(
             "active",
@@ -52,77 +65,82 @@ function updateProgress() {
 
 
 
-/* Убегающая кнопка */
+/* =========================
+   УБЕГАЮЩАЯ КНОПКА
+========================= */
 
 function moveButton(button) {
 
-    const padding = 15;
 
-    const buttonWidth = button.offsetWidth;
-    const buttonHeight = button.offsetHeight;
+    const parent =
+        button.parentElement;
+
+
+    const parentRect =
+        parent.getBoundingClientRect();
+
+
+    const buttonWidth =
+        button.offsetWidth;
+
+
+    const buttonHeight =
+        button.offsetHeight;
+
 
 
     const maxX =
-        window.innerWidth -
-        buttonWidth -
-        padding;
+        parentRect.width -
+        buttonWidth;
 
 
     const maxY =
-        window.innerHeight -
-        buttonHeight -
-        padding;
+        parentRect.height -
+        buttonHeight;
 
 
-    let x =
+
+    const x =
         Math.random() *
-        maxX;
-
-
-    let y =
-        80 +
-        Math.random() *
-        (maxY - 80);
-
-
-
-    // защита от выхода за экран
-
-    x = Math.max(
-        padding,
-        Math.min(
-            x,
+        Math.max(
+            0,
             maxX
-        )
-    );
+        );
 
 
-    y = Math.max(
-        80,
-        Math.min(
-            y,
+    const y =
+        Math.random() *
+        Math.max(
+            0,
             maxY
-        )
+        );
+
+
+
+    button.style.position =
+        "relative";
+
+
+    button.style.left =
+        `${x}px`;
+
+
+    button.style.top =
+        `${y}px`;
+
+
+
+    button.classList.add(
+        "shake"
     );
 
 
 
-    button.style.position = "fixed";
+    setTimeout(()=>{
 
-    button.style.left = `${x}px`;
-
-    button.style.top = `${y}px`;
-
-    button.style.zIndex = "100";
-
-
-
-    button.classList.add("shake");
-
-
-    setTimeout(() => {
-
-        button.classList.remove("shake");
+        button.classList.remove(
+            "shake"
+        );
 
     },400);
 
@@ -130,7 +148,9 @@ function moveButton(button) {
 
 
 
-/* Настройка убегающих кнопок */
+/* =========================
+   НАСТРОЙКА УБЕГАЮЩИХ КНОПОК
+========================= */
 
 function setupEscapeButton(id) {
 
@@ -140,22 +160,22 @@ function setupEscapeButton(id) {
 
 
 
-    if (!button) return;
+    if (!button) {
+        return;
+    }
 
 
-
-    // компьютер
 
     button.addEventListener(
         "mouseenter",
-        () => {
+        ()=>{
+
             moveButton(button);
+
         }
     );
 
 
-
-    // телефон
 
     button.addEventListener(
         "touchstart",
@@ -173,8 +193,6 @@ function setupEscapeButton(id) {
 
 
 
-    // дополнительная защита
-
     button.addEventListener(
         "pointerdown",
         (event)=>{
@@ -190,8 +208,6 @@ function setupEscapeButton(id) {
 
 
 
-/* Подключаем кнопки */
-
 setupEscapeButton("wrong1");
 
 setupEscapeButton("wrong2");
@@ -202,7 +218,9 @@ setupEscapeButton("noButton");
 
 
 
-/* Сердечки */
+/* =========================
+   СЕРДЕЧКИ
+========================= */
 
 function createHeart() {
 
@@ -215,20 +233,21 @@ function createHeart() {
         "heart";
 
 
-    const symbols = [
+    const hearts = [
         "❤️",
         "💕",
-        "💗",
         "💖",
+        "💗",
         "✨"
     ];
 
 
     heart.textContent =
-        symbols[
+        hearts[
             Math.floor(
-                Math.random() *
-                symbols.length
+                Math.random()
+                *
+                hearts.length
             )
         ];
 
@@ -240,8 +259,9 @@ function createHeart() {
 
     heart.style.fontSize =
         12 +
-        Math.random() * 20 +
+        Math.random() * 22 +
         "px";
+
 
 
     heart.style.animationDuration =
@@ -253,7 +273,9 @@ function createHeart() {
 
     document
         .getElementById("hearts")
-        .appendChild(heart);
+        .appendChild(
+            heart
+        );
 
 
 
@@ -261,24 +283,26 @@ function createHeart() {
 
         heart.remove();
 
-    },10000);
+    },11000);
 
 }
 
 
 
 
-function createHearts(amount){
+
+function createHearts(count){
+
 
     for(
         let i = 0;
-        i < amount;
+        i < count;
         i++
     ){
 
         setTimeout(
             createHeart,
-            i * 100
+            i * 120
         );
 
     }
@@ -288,7 +312,10 @@ function createHearts(amount){
 
 
 
-/* Запуск */
+/* =========================
+   СТАРТ
+========================= */
+
 
 createHearts(15);
 
