@@ -1,30 +1,28 @@
 let currentScreen = 1;
 
 
-/* =========================
-   ПЕРЕХОДЫ
-========================= */
+/* Переходы */
 
 function nextScreen() {
 
-    if (currentScreen >= 7) {
+    if (currentScreen >= 6) {
         return;
     }
 
 
-    const oldScreen = document.getElementById(
-        `screen${currentScreen}`
-    );
+    const oldScreen =
+        document.getElementById(
+            `screen${currentScreen}`
+        );
 
 
-    const newScreen = document.getElementById(
-        `screen${currentScreen + 1}`
-    );
+    const newScreen =
+        document.getElementById(
+            `screen${currentScreen + 1}`
+        );
 
 
-    if (!newScreen) {
-        return;
-    }
+    if (!newScreen) return;
 
 
     oldScreen.classList.remove("active");
@@ -37,14 +35,14 @@ function nextScreen() {
 
     updateProgress();
 
-    createHearts(12);
+    createHearts(10);
+
 }
 
 
 
-/* =========================
-   ТОЧКИ
-========================= */
+
+/* Точки сверху */
 
 function updateProgress() {
 
@@ -52,7 +50,7 @@ function updateProgress() {
         document.querySelectorAll(".dot");
 
 
-    dots.forEach((dot, index)=>{
+    dots.forEach((dot,index)=>{
 
         dot.classList.toggle(
             "active",
@@ -65,9 +63,8 @@ function updateProgress() {
 
 
 
-/* =========================
-   УБЕГАНИЕ КНОПКИ
-========================= */
+
+/* Убегающая кнопка */
 
 function moveButton(button) {
 
@@ -100,12 +97,12 @@ function moveButton(button) {
 
     const x =
         Math.random() *
-        Math.max(0, maxX);
+        Math.max(0,maxX);
 
 
     const y =
         Math.random() *
-        Math.max(0, maxY);
+        Math.max(0,maxY);
 
 
 
@@ -140,18 +137,17 @@ function moveButton(button) {
 
 
 
-/* =========================
-   ОБЫЧНЫЕ УБЕГАЮЩИЕ КНОПКИ
-========================= */
 
-function setupEscapeButton(id) {
+/* Подключение убегающих кнопок */
+
+function setupEscapeButton(id){
 
 
     const button =
         document.getElementById(id);
 
 
-    if (!button) return;
+    if(!button) return;
 
 
 
@@ -185,6 +181,7 @@ function setupEscapeButton(id) {
         escape
     );
 
+
 }
 
 
@@ -193,127 +190,14 @@ setupEscapeButton("wrong1");
 
 setupEscapeButton("wrong2");
 
+setupEscapeButton("noButton");
 
 
 
 
-/* =========================
-   КНОПКА НЕТ ❤️
-========================= */
 
 
-let noAttempts = 0;
-
-
-const noButton =
-    document.getElementById("noButton");
-
-
-
-if (noButton) {
-
-
-    function noEscape(e){
-
-
-        e.preventDefault();
-
-
-
-        noAttempts++;
-
-
-
-        if(noAttempts === 1){
-
-
-            noButton.innerHTML =
-                "Точно нет? 👀";
-
-
-            moveButton(noButton);
-
-        }
-
-
-
-        else if(noAttempts === 2){
-
-
-            noButton.innerHTML =
-                "Ну пожалуйста 🥺";
-
-
-            noButton.style.transform =
-                "scale(0.85)";
-
-
-            moveButton(noButton);
-
-        }
-
-
-
-        else if(noAttempts === 3){
-
-
-            noButton.innerHTML =
-                "Хорошо ❤️";
-
-
-            noButton.style.transform =
-                "scale(0.75)";
-
-
-            noButton.style.position =
-                "relative";
-
-
-
-            // больше не убегает
-
-            noButton.replaceWith(
-                noButton.cloneNode(true)
-            );
-
-        }
-
-
-    }
-
-
-
-    noButton.addEventListener(
-        "mouseenter",
-        noEscape
-    );
-
-
-    noButton.addEventListener(
-        "touchstart",
-        noEscape,
-        {
-            passive:false
-        }
-    );
-
-
-    noButton.addEventListener(
-        "pointerdown",
-        noEscape
-    );
-
-
-}
-
-
-
-
-
-/* =========================
-   СЕРДЕЧКИ
-========================= */
-
+/* Сердечки */
 
 function createHeart(){
 
@@ -326,8 +210,7 @@ function createHeart(){
         "heart";
 
 
-
-    const symbols = [
+    const symbols=[
         "❤️",
         "💕",
         "💖",
@@ -340,7 +223,8 @@ function createHeart(){
     heart.textContent =
         symbols[
             Math.floor(
-                Math.random() *
+                Math.random()
+                *
                 symbols.length
             )
         ];
@@ -348,25 +232,25 @@ function createHeart(){
 
 
     heart.style.left =
-        Math.random() * 100 + "vw";
+        Math.random()*100+"vw";
 
 
     heart.style.fontSize =
-        12 +
-        Math.random() * 22 +
+        12+
+        Math.random()*20+
         "px";
 
 
     heart.style.animationDuration =
-        5 +
-        Math.random() * 5 +
+        5+
+        Math.random()*5+
         "s";
 
 
 
     document
-        .getElementById("hearts")
-        .appendChild(heart);
+    .getElementById("hearts")
+    .appendChild(heart);
 
 
 
@@ -374,38 +258,31 @@ function createHeart(){
 
         heart.remove();
 
-    },11000);
+    },10000);
 
 }
+
 
 
 
 
 function createHearts(count){
 
-
     for(
-        let i = 0;
-        i < count;
+        let i=0;
+        i<count;
         i++
     ){
 
         setTimeout(
             createHeart,
-            i * 120
+            i*120
         );
 
     }
 
 }
 
-
-
-
-
-/* =========================
-   СТАРТ
-========================= */
 
 
 createHearts(15);
