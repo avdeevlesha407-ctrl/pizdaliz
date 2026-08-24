@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Для тебя ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+    </div>
+
+    <div id="hearts"></div>
+
+    <div class="progress">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <main>
+
+        <!-- ЭКРАН 1 -->
+
+        <section class="screen active" id="screen1">
+
+            <div class="emoji">💌</div>
+
+            <h1>
+                Я кое-что для тебя приготовил...
+            </h1>
+
+            <p>
+                Надеюсь, тебе понравится)
+            </p>
+
+            <button onclick="nextScreen()">
+                Нажми меня ❤️
+            </button>
+
+        </section>
+
+
+        <!-- ЭКРАН 2 -->
+
+        <section class="screen" id="screen2">
+
+            <div class="emoji">👀</div>
+
+            <h1>
+                Ты всё-таки нажала...
+            </h1>
+
+            <p>
+                Ну хорошо) Раз уж начала — придётся идти до конца 😏
+            </p>
+
+            <button onclick="nextScreen()">
+                Идём дальше →
+            </button>
+
+        </section>
+
+
+        <!-- ЭКРАН 3 -->
+
+        <section class="screen" id="screen3">
+
+            <div class="emoji">🤔</div>
+
+            <h1>
+                Как ты думаешь, зачем я сделал этот сайт?
+            </h1>
+
+            <div class="answers">
+
+                <button
+                    class="answer escape-button"
+                    id="wrong1">
+                    Просто так
+                </button>
+
+                <button
+                    class="answer escape-button"
+                    id="wrong2">
+                    Скучно
+                </button>
+
+                <button
+                    class="answer correct"
+                    onclick="nextScreen()">
+                    Я тебя люблю ❤️
+                </button>
+
+            </div>
+
+            <div class="hint">
+                Подумай хорошенько 👀
+            </div>
+
+        </section>
+
+
+        <!-- ЭКРАН 4 -->
+
+        <section class="screen" id="screen4">
+
+            <div class="emoji">
+                🥰
+            </div>
+
+            <h1>
+                Я так и знал, что ты правильно ответишь!
+            </h1>
+
+            <p>
+                Люблю тебя ❤️
+            </p>
+
+            <button onclick="nextScreen()">
+                Дальше ❤️
+            </button>
+
+        </section>
+
+
+        <!-- ЭКРАН 5 -->
+
+        <section class="screen" id="screen5">
+
+            <div class="emoji">
+                🥺
+            </div>
+
+            <h1>
+                Я был не прав где-то...
+            </h1>
+
+            <p>
+                Ты меня прощаешь?
+            </p>
+
+            <div class="answers forgiveness">
+
+                <button
+                    class="answer correct"
+                    onclick="nextScreen()">
+                    ДА ❤️
+                </button>
+
+                <button
+                    class="answer escape-button"
+                    id="noButton">
+                    НЕТ
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ЭКРАН 6 -->
+
+        <section class="screen final-screen" id="screen6">
+
+            <div class="emoji">
+                ❤️
+            </div>
+
+            <h1>
+                Я ЗНАЛ, ЧТО ТЫ ПРОСТИЛА МЕНЯ!
+            </h1>
+
+            <p>
+                ЛЮБЛЮ ТЕБЯ! ❤️
+            </p>
+
+
+            <div class="photo-container">
+
+                <!--
+                    ЗДЕСЬ ПОТОМ БУДЕТ ТВОЯ ФОТОГРАФИЯ.
+
+                    Положи фотографию рядом с файлами сайта
+                    и назови её:
+
+                    photo.jpg
+
+                    После этого раскомментируй строку ниже.
+                -->
+
+                <div class="photo-placeholder">
+                    📸
+                    <br>
+                    Здесь будет твоя фотография
+                    ❤️
+                </div>
+
+                <!--
+                <img
+                    src="photo.jpg"
+                    alt="Мы ❤️"
+                    class="my-photo">
+                -->
+
+            </div>
+
+
+            <div class="final-text">
+                Спасибо, что дошла до конца 🥹
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
