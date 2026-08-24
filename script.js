@@ -74,57 +74,35 @@ function moveButton(button) {
 
     const padding = 20;
 
-
-    const maxX =
-        window.innerWidth -
-        button.offsetWidth -
-        padding;
+    const buttonWidth = button.offsetWidth;
+    const buttonHeight = button.offsetHeight;
 
 
-    const maxY =
-        window.innerHeight -
-        button.offsetHeight -
-        padding;
+    const maxX = window.innerWidth - buttonWidth - padding;
+    const maxY = window.innerHeight - buttonHeight - padding;
 
 
-    const x =
-        padding +
-        Math.random() *
-        Math.max(
-            1,
-            maxX - padding
-        );
+    const x = Math.random() * maxX;
+
+    const y = 80 + Math.random() * (maxY - 80);
 
 
-    const y =
-        70 +
-        Math.random() *
-        Math.max(
-            1,
-            maxY - 70
-        );
+    button.style.position = "fixed";
+
+    button.style.left = `${Math.max(padding, x)}px`;
+
+    button.style.top = `${Math.max(80, y)}px`;
+
+    button.style.zIndex = "100";
 
 
-    button.style.position =
-        "fixed";
+    button.classList.add("shake");
 
 
-    button.style.left =
-        `${x}px`;
-
-
-    button.style.top =
-        `${y}px`;
-
-
-    button.style.zIndex =
-        "100";
-
-
-    button.classList.add(
-        "shake"
-    );
-
+    setTimeout(() => {
+        button.classList.remove("shake");
+    }, 400);
+}
 
     setTimeout(
         () => {
