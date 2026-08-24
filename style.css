@@ -686,3 +686,118 @@ button:active {
         top: 13px;
     }
 }
+/* =========================
+   ДВЕ ФОТОГРАФИИ НА ФИНАЛЕ
+========================= */
+
+.photos {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+
+.photo {
+    width: 210px;
+    height: 260px;
+
+    padding: 5px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff477f,
+            #b43dff
+        );
+
+    box-shadow:
+        0 15px 40px
+        rgba(255, 60, 130, 0.2);
+
+    flex-shrink: 1;
+}
+
+
+.photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+}
+
+
+.heart-between {
+    flex-shrink: 0;
+
+    font-size: 38px;
+
+    animation:
+        heartBeat
+        1.2s
+        ease-in-out
+        infinite;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(255, 60, 130, 0.65)
+        );
+}
+
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+
+/* =========================
+   ФОТО НА ТЕЛЕФОНЕ
+========================= */
+
+@media (max-width: 520px) {
+
+    .photos {
+        gap: 7px;
+
+        margin-top: 25px;
+    }
+
+    .photo {
+        width: 38vw;
+        height: 48vw;
+
+        max-height: 230px;
+
+        border-radius: 16px;
+    }
+
+    .photo img {
+        border-radius: 12px;
+    }
+
+    .heart-between {
+        font-size: 25px;
+    }
+
+}
