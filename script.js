@@ -2,7 +2,7 @@ let currentScreen = 1;
 
 
 /* =========================
-   ПЕРЕХОДЫ МЕЖДУ ЭКРАНАМИ
+   ПЕРЕХОДЫ
 ========================= */
 
 function nextScreen() {
@@ -43,7 +43,7 @@ function nextScreen() {
 
 
 /* =========================
-   ТОЧКИ ПРОГРЕССА
+   ТОЧКИ
 ========================= */
 
 function updateProgress() {
@@ -66,7 +66,7 @@ function updateProgress() {
 
 
 /* =========================
-   УБЕГАЮЩАЯ КНОПКА
+   УБЕГАНИЕ КНОПКИ
 ========================= */
 
 function moveButton(button) {
@@ -76,7 +76,7 @@ function moveButton(button) {
         button.parentElement;
 
 
-    const parentRect =
+    const rect =
         parent.getBoundingClientRect();
 
 
@@ -90,30 +90,22 @@ function moveButton(button) {
 
 
     const maxX =
-        parentRect.width -
-        buttonWidth;
+        rect.width - buttonWidth;
 
 
     const maxY =
-        parentRect.height -
-        buttonHeight;
+        rect.height - buttonHeight;
 
 
 
     const x =
         Math.random() *
-        Math.max(
-            0,
-            maxX
-        );
+        Math.max(0, maxX);
 
 
     const y =
         Math.random() *
-        Math.max(
-            0,
-            maxY
-        );
+        Math.max(0, maxY);
 
 
 
@@ -149,7 +141,7 @@ function moveButton(button) {
 
 
 /* =========================
-   НАСТРОЙКА УБЕГАЮЩИХ КНОПОК
+   ОБЫЧНЫЕ УБЕГАЮЩИЕ КНОПКИ
 ========================= */
 
 function setupEscapeButton(id) {
@@ -159,49 +151,38 @@ function setupEscapeButton(id) {
         document.getElementById(id);
 
 
+    if (!button) return;
 
-    if (!button) {
-        return;
+
+
+    function escape(e){
+
+        e.preventDefault();
+
+        moveButton(button);
+
     }
 
 
 
     button.addEventListener(
         "mouseenter",
-        ()=>{
-
-            moveButton(button);
-
-        }
+        escape
     );
-
 
 
     button.addEventListener(
         "touchstart",
-        (event)=>{
-
-            event.preventDefault();
-
-            moveButton(button);
-
-        },
+        escape,
         {
             passive:false
         }
     );
 
 
-
     button.addEventListener(
         "pointerdown",
-        (event)=>{
-
-            event.preventDefault();
-
-            moveButton(button);
-
-        }
+        escape
     );
 
 }
@@ -212,7 +193,118 @@ setupEscapeButton("wrong1");
 
 setupEscapeButton("wrong2");
 
-setupEscapeButton("noButton");
+
+
+
+
+/* =========================
+   КНОПКА НЕТ ❤️
+========================= */
+
+
+let noAttempts = 0;
+
+
+const noButton =
+    document.getElementById("noButton");
+
+
+
+if (noButton) {
+
+
+    function noEscape(e){
+
+
+        e.preventDefault();
+
+
+
+        noAttempts++;
+
+
+
+        if(noAttempts === 1){
+
+
+            noButton.innerHTML =
+                "Точно нет? 👀";
+
+
+            moveButton(noButton);
+
+        }
+
+
+
+        else if(noAttempts === 2){
+
+
+            noButton.innerHTML =
+                "Ну пожалуйста 🥺";
+
+
+            noButton.style.transform =
+                "scale(0.85)";
+
+
+            moveButton(noButton);
+
+        }
+
+
+
+        else if(noAttempts === 3){
+
+
+            noButton.innerHTML =
+                "Хорошо ❤️";
+
+
+            noButton.style.transform =
+                "scale(0.75)";
+
+
+            noButton.style.position =
+                "relative";
+
+
+
+            // больше не убегает
+
+            noButton.replaceWith(
+                noButton.cloneNode(true)
+            );
+
+        }
+
+
+    }
+
+
+
+    noButton.addEventListener(
+        "mouseenter",
+        noEscape
+    );
+
+
+    noButton.addEventListener(
+        "touchstart",
+        noEscape,
+        {
+            passive:false
+        }
+    );
+
+
+    noButton.addEventListener(
+        "pointerdown",
+        noEscape
+    );
+
+
+}
 
 
 
@@ -222,7 +314,8 @@ setupEscapeButton("noButton");
    СЕРДЕЧКИ
 ========================= */
 
-function createHeart() {
+
+function createHeart(){
 
 
     const heart =
@@ -233,7 +326,8 @@ function createHeart() {
         "heart";
 
 
-    const hearts = [
+
+    const symbols = [
         "❤️",
         "💕",
         "💖",
@@ -242,12 +336,12 @@ function createHeart() {
     ];
 
 
+
     heart.textContent =
-        hearts[
+        symbols[
             Math.floor(
-                Math.random()
-                *
-                hearts.length
+                Math.random() *
+                symbols.length
             )
         ];
 
@@ -263,7 +357,6 @@ function createHeart() {
         "px";
 
 
-
     heart.style.animationDuration =
         5 +
         Math.random() * 5 +
@@ -273,9 +366,7 @@ function createHeart() {
 
     document
         .getElementById("hearts")
-        .appendChild(
-            heart
-        );
+        .appendChild(heart);
 
 
 
@@ -286,7 +377,6 @@ function createHeart() {
     },11000);
 
 }
-
 
 
 
@@ -308,6 +398,7 @@ function createHearts(count){
     }
 
 }
+
 
 
 
