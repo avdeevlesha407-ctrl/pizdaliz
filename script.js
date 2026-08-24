@@ -1,13 +1,7 @@
-/* =========================
-   CURRENT SCREEN
-========================= */
-
 let currentScreen = 1;
 
 
-/* =========================
-   GO TO NEXT SCREEN
-========================= */
+/* Переход между экранами */
 
 function nextScreen() {
 
@@ -15,15 +9,13 @@ function nextScreen() {
         return;
     }
 
-    const oldScreen =
-        document.getElementById(
-            `screen${currentScreen}`
-        );
+    const oldScreen = document.getElementById(
+        `screen${currentScreen}`
+    );
 
-    const newScreen =
-        document.getElementById(
-            `screen${currentScreen + 1}`
-        );
+    const newScreen = document.getElementById(
+        `screen${currentScreen + 1}`
+    );
 
 
     oldScreen.classList.remove("active");
@@ -33,148 +25,172 @@ function nextScreen() {
 
     currentScreen++;
 
-
     updateProgress();
 
-
-    createHearts(8);
+    createHearts(10);
 }
 
 
-/* =========================
-   PROGRESS DOTS
-========================= */
+
+/* Индикатор экранов */
 
 function updateProgress() {
 
-    const dots =
-        document.querySelectorAll(
-            ".dot"
+    const dots = document.querySelectorAll(".dot");
+
+
+    dots.forEach((dot, index) => {
+
+        dot.classList.toggle(
+            "active",
+            index === currentScreen - 1
         );
 
+    });
 
-    dots.forEach(
-        (dot, index) => {
-
-            dot.classList.toggle(
-                "active",
-                index === currentScreen - 1
-            );
-
-        }
-    );
 }
 
 
-/* =========================
-   ESCAPE BUTTON
-========================= */
+
+/* Убегающая кнопка */
 
 function moveButton(button) {
 
-    const padding = 20;
+    const padding = 15;
 
     const buttonWidth = button.offsetWidth;
     const buttonHeight = button.offsetHeight;
 
 
-    const maxX = window.innerWidth - buttonWidth - padding;
-    const maxY = window.innerHeight - buttonHeight - padding;
+    const maxX =
+        window.innerWidth -
+        buttonWidth -
+        padding;
 
 
-    const x = Math.random() * maxX;
+    const maxY =
+        window.innerHeight -
+        buttonHeight -
+        padding;
 
-    const y = 80 + Math.random() * (maxY - 80);
+
+    let x =
+        Math.random() *
+        maxX;
+
+
+    let y =
+        80 +
+        Math.random() *
+        (maxY - 80);
+
+
+
+    // защита от выхода за экран
+
+    x = Math.max(
+        padding,
+        Math.min(
+            x,
+            maxX
+        )
+    );
+
+
+    y = Math.max(
+        80,
+        Math.min(
+            y,
+            maxY
+        )
+    );
+
 
 
     button.style.position = "fixed";
 
-    button.style.left = `${Math.max(padding, x)}px`;
+    button.style.left = `${x}px`;
 
-    button.style.top = `${Math.max(80, y)}px`;
+    button.style.top = `${y}px`;
 
     button.style.zIndex = "100";
+
 
 
     button.classList.add("shake");
 
 
     setTimeout(() => {
+
         button.classList.remove("shake");
-    }, 400);
-}
 
-    setTimeout(
-        () => {
-            button.classList.remove(
-                "shake"
-            );
-        },
-        400
-    );
+    },400);
+
 }
 
 
-/* =========================
-   ESCAPE EVENTS
-========================= */
+
+/* Настройка убегающих кнопок */
 
 function setupEscapeButton(id) {
+
 
     const button =
         document.getElementById(id);
 
 
-    if (!button) {
-        return;
-    }
+
+    if (!button) return;
 
 
-    function escape(event) {
 
-        event.preventDefault();
-
-        moveButton(button);
-    }
-
-
-    /*
-       Компьютер
-    */
+    // компьютер
 
     button.addEventListener(
         "mouseenter",
-        escape
-    );
-
-
-    /*
-       Телефон
-    */
-
-    button.addEventListener(
-        "touchstart",
-        escape,
-        {
-            passive: false
+        () => {
+            moveButton(button);
         }
     );
 
 
-    /*
-       Дополнительная защита
-    */
+
+    // телефон
+
+    button.addEventListener(
+        "touchstart",
+        (event)=>{
+
+            event.preventDefault();
+
+            moveButton(button);
+
+        },
+        {
+            passive:false
+        }
+    );
+
+
+
+    // дополнительная защита
 
     button.addEventListener(
         "pointerdown",
-        escape
+        (event)=>{
+
+            event.preventDefault();
+
+            moveButton(button);
+
+        }
     );
+
 }
 
 
-/* =========================
-   ACTIVATE ESCAPE BUTTONS
-========================= */
+
+/* Подключаем кнопки */
 
 setupEscapeButton("wrong1");
 
@@ -183,16 +199,16 @@ setupEscapeButton("wrong2");
 setupEscapeButton("noButton");
 
 
-/* =========================
-   FLOATING HEART
-========================= */
+
+
+
+/* Сердечки */
 
 function createHeart() {
 
+
     const heart =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     heart.className =
@@ -204,7 +220,6 @@ function createHeart() {
         "💕",
         "💗",
         "💖",
-        "💘",
         "✨"
     ];
 
@@ -218,9 +233,9 @@ function createHeart() {
         ];
 
 
+
     heart.style.left =
-        Math.random() * 100 +
-        "vw";
+        Math.random() * 100 + "vw";
 
 
     heart.style.fontSize =
@@ -235,51 +250,47 @@ function createHeart() {
         "s";
 
 
-    heart.style.animationDelay =
-        Math.random() * 1.5 +
-        "s";
-
 
     document
         .getElementById("hearts")
         .appendChild(heart);
 
 
-    setTimeout(
-        () => {
-            heart.remove();
-        },
-        11000
-    );
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },10000);
+
 }
 
 
-/* =========================
-   CREATE MANY HEARTS
-========================= */
 
-function createHearts(amount) {
 
-    for (
+function createHearts(amount){
+
+    for(
         let i = 0;
         i < amount;
         i++
-    ) {
+    ){
 
         setTimeout(
             createHeart,
-            i * 120
+            i * 100
         );
 
     }
+
 }
 
 
-/* =========================
-   START HEARTS
-========================= */
 
-createHearts(12);
+
+/* Запуск */
+
+createHearts(15);
 
 
 setInterval(
